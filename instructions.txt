@@ -1,0 +1,19 @@
+create the SSH key and add it to the ununtu  machine. Now we will start the django projecvt
+
+
+setting up the virtual environment
+1) create virtual environment
+ 
+pre req: install pip and virtual env, refer official page. once you install it it will install the virtual env too
+
+(if not installed, install virtualenv)
+
+--->>> virtualenv -p python3 .
+
+activate vitual env using the following command
+
+--->>> source bin/activate 
+
+
+
+
