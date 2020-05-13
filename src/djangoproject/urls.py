@@ -20,10 +20,11 @@ from django.urls import path
 # why it is showing as in pycharm, even though it is working
 
 
-from pages import views
+from pages.views import home_view,about_view
 
 urlpatterns = [
-    path('', views.home_view, name='home'),
-    path('contacts/', views.contact_view, name='home'),
+    path('home/', home_view, name='home'),
+     path('about/', about_view, name='about'),
+    #path('contacts/', views.contact_view, name='home'),
     path('admin/', admin.site.urls),
 ]

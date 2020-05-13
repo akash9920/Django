@@ -5,10 +5,12 @@ from django.http import HttpResponse
 # Create your views here.
 # views handles pages, routing etc
 
-def home_view(*args, **kwargs):
-    return HttpResponse("<h1>Hellow world</h1>")
-    # return "<h1>Hello World<h2>" # its a string of html code
+def home_view(request,*args, **kwargs):
+
+   #2 return HttpResponse("<h1>Hellow world</h1>")
+   # 1return "<h1>Hello World<h2>" # its a string of html code
+   return render(request,"home.html",{})
 
 
-def contact_view(*args, **kwargs):
-    return HttpResponse("<h1>contacts</h1>")
+def about_view(request,*args, **kwargs):
+    return render(request,"about.html",{})
