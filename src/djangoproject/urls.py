@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# its not showing this as an error in the sublime text, i dontknow
+# why it is showing as in pycharm, even though it is working
+
+
+from pages import views
+
 urlpatterns = [
+    path('', views.home_view, name='home'),
+    path('contacts/', views.contact_view, name='home'),
     path('admin/', admin.site.urls),
 ]

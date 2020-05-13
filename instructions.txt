@@ -12,7 +12,172 @@ pre req: install pip and virtual env, refer official page. once you install it i
 
 activate vitual env using the following command
 
---->>> source bin/activate 
+--->>> source bin/activate  (use deativate to deactivate it)
+
+install django
+
+-->> pip install django==2.0.7
+
+use --->>[ pip freeze  ] to see the current dependecies, lib installed
+
+--->>> which python
+
+create a src folder and add a project 
+
+--->> django-admin createproject "projectName" .   [dont forget the . at the end]
+
+[the follwoing command is to run server]
+
+--->> python manage.py runserver
+
+
+inside the project:
+
+# settings.py
+BASE DIR gives you the address of the  the directory in which your prejct is, in our case.ist src
+
+secret key: every[roject has a seperate secret key
+
+debug can be set to false when doing in production... uses later
+
+Installed apps: like components you will be creating, like basically the apps
+
+ROOT_URLCONF : this is meant for the routes
+
+templates: html pages rendered in django.
+
+wsgi application : this is how your server works, can change settings.
+
+database: django works well with the data bases,
+auth_pass: pass validators
+
+static_URL :  for the static files like images etc.
+
+synching the project : 
+
+----->>>> [manage.py migrate]
+
+to create the user you can use
+
+--->> python manage.py createsuperuser
+
+apps are really gd for storing data , mapping what data you want to store and managing the different parts
+
+
+create app using the following command
+
+--->>> python manage.py startapp products
+ 
+#Models.py
+
+// in your app you add stuff to models. need more clarity on what are models?
+
+when you ceate and add stuff to your models.py
+
+
+follwo the steps:
+
+1) add you app name in setting .py under installed app and just mention the name
+
+migrate the changes using the following commands
+
+-->> python manage.py makemigrations
+-->> python manage.py migrate
+
+if we want our model to look inside the admin, we need to add to the admin.py under products app [in 
+
+ the app]
+
+from .models import Product
+
+lec9: we will create product objects in python shell
+
+to enable shell
+-->> python manage.py shell
+
+after shell shows up , we can import the object and create products
+
+--->>> Product.objects.create(fill the required parameters)
+
+now we will add restriction about the textfields adn etc:
+
+lec10: New model fields
+this is more important
+
+deleting files in migrations and deleting the databse to start over
+
+we can refer the following lnk for the referenced models:
+
+https://docs.djangoproject.com/en/3.0/ref/models/fields/#model-field-types
+
+Note:  View is something which handles our requests
+
+now i creates an app pages, have habit of adding the app name in installed apps under settings.py
+
+lec 12: custom homepage
+
+we do our html stuff in view, where we write routes and html codes  and stuff, so import the following library to django thing
+
+-->> from django.http import HttpResponse
+
+step--->>
+
+we do wrte the html and route functions in the view.py of the app.
+
+ex: 
+'''
+from django.http import HttpResponse
+
+
+def home_view(*args,**kwargs):
+    return HttpResponse("<h1>Hellow world</h1>") '''
+
+
+??????look about the *args, **kwargs
+
+
+after adding a route to the view, add its path to the url.py so that it can be identified by the project, in short can identify the route.
+
+
+
+like the following:
+
+from pages import views
+
+urlpatterns = [
+    path('', views.home_view, name='home'),
+    path('admin/', admin.site.urls),
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
