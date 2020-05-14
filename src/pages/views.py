@@ -9,7 +9,13 @@ def home_view(request,*args, **kwargs):
 
    #2 return HttpResponse("<h1>Hellow world</h1>")
    # 1return "<h1>Hello World<h2>" # its a string of html code
-   return render(request,"home.html",{})
+   my_context = {
+   "key1":"rhis is my data",
+   "key2": 123456789,
+   "key3" : ["akash","butter","chicken",
+   "anand"]
+   }
+   return render(request,"home.html",my_context)
 
 
 def about_view(request,*args, **kwargs):
