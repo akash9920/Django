@@ -136,7 +136,8 @@ def home_view(*args,**kwargs):
 ??????look about the *args, **kwargs
 
 
-after adding a route to the view, add its path to the url.py so that it can be identified by the project, in short can identify the route.
+after adding a route to the view, add its path to the url.py
+so that it can be identified by the project, in short can identify the route.
 
 
 
@@ -149,12 +150,222 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
+but since there can be multiple views for the better will be directly import the homeview
+
+like the following
+
+from pages.views import home_view
+   path('',home_view, name='home'),
+
+lec 13
+URL routing and requests
+
+  path(' routes/ ',home_view, name='home'),
+we can add as many as routes we want here
+depedning upon that, also one thing to notice that the function we have created by default has request argument so we can use that and do a lot sort of operations
+
+def home_view(request,*args,**kwargs):
+	by printing see what these arguments are and what they do:
+
+lec 14
+Django Templates
+
+we willuse render lib
+
+return something like this
+ # 1return "<h1>Hello World<h2>" # its a string of html code
+   return render(request,"home.html",{})
+
+now create a location(i.e folder) where you can store the html template.
+
+-->> create the folder under the src dir by a name "templates"
+
+now we want the django to be able to look for this folder of templates, so
+we need to add the Dirs under templates under settings as hown below:
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+--->>>>>'DIRS': [os.path.join(BASE_DIR, "templates")],
+        here the BASE_DIR is already defined by the django to get the os indipendent directory
+
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 
 
+in thi sfashion you can create home.html, contact.html,about.html , it will work. The only thing is there are a lot of repetetiveness so we need to change that.
+
+how : ans is template inheritance
+
+lec 15
+Django template engine basics
+
+template inheritence
+
+convention :  create a base html page == "base.html"which is the root html page.
+
+
+--->>> {% %} , a syntac for extending the class as well as replacing the content etc..
+
+
+can make base page like the following
+
+<!doctype html>
+<html>
+	<head></head>
+	<body>
+		{% block content%}
+			some hontent to be replaced
+		{% endblock content%}
+
+the page gonna be same but the body content will keep changing for each page
+	</body>
+		
+</html>
+
+
+how to inherit
+
+--->> syntrax{% extends 'base.html' %}
+
+-->> 		{% block content%}
+			this is home page etc
+		{% endblock %}
+
+content is basically a variable we have created,
+Note: do remember that the name of the variable i.e content should be same in all the child html pages
+
+mistake: in urls i gave the same name i.e home for all routes
+
+lec 17:
+rendering context in a template
+
+#Template context
+
+template +context--> djnago turn that into regular hhtml raw wali
+
+context meaning: any data type 
+
+
+def about_view(request,*args, **kwargs):
+	define data procees it and pass the variable or context
+    return render(request,"about.html",#context #dta comes here--->>> {})
+
+now render the data in the html or 
+
+
+-->>> <p>
+{{nameofthekey}},{{}}
+</p>
+
+it should come under content bloack as we are using inheritance thats why 
+
+{% block xyzname}
+-->>> <p>
+{{nameofthekey}},{{}}
+</p>
+{% endblock}
+
+lec 18, For loop
+
+this is how you use for loop in django:
+
+where key3 is a list
+
+<ul>
+	{% for item in key3 %}
+<li>
+	{{item}}
+</li>
+	{% endfor %}
+</ul>
+		
+lec 19
+conditions in template
+
+ {% if somecondition %}
+ {% elif %}
+ {% else %}
+
+lec 20
+template tags and filter
+
+extends, if, else for etc:
+
+see follow the django socumnents
+
+
+filter:
+
+this is a pipe = "|"
+we can make our custom filters
+
+lec 21, imoprtant :  time to connect  to the databse
+
+to open shell.. type this under virtual env of django
+
+--->>python manage.py shell
+
+here now we are gonna get details of product from database... in this product view
+basically its for DB so... you will understand in detail while working on the stuff
+
+so create a method something like this
+
+
+whatever we gonna do
+
+product_detail_view(request):
+	context = {}
+	return render(request,"the Html page relative link", context)
 
 
 
+also, ex of a import == from products.models import Product
+remember the inheritance stardard format
+
+{% extends 'base.html ' %}
+
+{% block content %}
+
+{% blockend %}
+
+
+Note: any URL added must be mentioned in the urls.py under settings so that django will be able to identify which URL it is
+
+s\so the process is 
+-->> edit adn add in views under the app
+-->> make the template under the template folder or the folders you have defined
+-->> add theat to the urls under mainproject folder
+
+
+lecture 22:
+
+we can resue app as well
+
+inside of our app we can have templates, also we can override a template
+we do this so that we can have reusable components:
+
+NOTE:/ to experiment --->>> when django runs it looks for the template in admin, each and django app I guess...
+
+(need to see lec 22 again)
+
+so yeah its true: it look in django project, in admin and then in the app project
+ for which the route is there
+
+---------!!1 the above in term of concept--------!!!
+
+lec 23 Django model forms
 
 
 
